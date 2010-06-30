@@ -1,0 +1,3 @@
+test_app/tmp/*
+test_app/db/*
+test_app/log/*

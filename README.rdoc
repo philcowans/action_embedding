@@ -1,14 +1,14 @@
 = ActionEmbedding
 
+An experimental Rails plugin to investigate ways to embed pagelets
+into standard ActionView templates. The term pagelet is taken from
+Facebook's description of their BigPipe infrastructure [1].
+
 <b>WARNING:</b> This code is very far from being production ready. It
 digs quite deeply into the internals of Rails, and is likely to have
 side effects which could make your app unstable. Having said that, if
 you have an app where stability isn't that important, and you'd like
 to try this out, any feedback would be appreciated.
-
-An experimental Rails plugin to investigate ways to embed pagelets
-into standard ActionView templates. The term pagelet is taken from
-Facebook's description of their BigPipe infrastructure [1].
 
 == What does it do?
 

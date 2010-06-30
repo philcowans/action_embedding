@@ -2,6 +2,51 @@
 
 An experimental Rails plugin to investigate ways to embed pagelets
 into standard ActionView templates. The term pagelet is taken from
-Facebook's post on their BigPipe infrastructure [1].
+Facebook's description of their BigPipe infrastructure [1].
+
+== What does it do?
+
+Not much at the moment, but the idea is to look at different ways of
+composing larger pages from distinct 'pagelets' (or modules, or
+components, or cells). The key design principles are:
+
+* Pagelets share little or no state with each other or with the
+  containing page. This makes them easier to reconfigure, if necessary
+  using a language other than Ruby, and encourages good programming.
+
+* Pagelets have externally meaningful URLs. Again, this makes it
+  possible to refer to them outside of a Rails application.
+
+* Switching between embedding methods should be a configuration rather
+  than coding change.
+
+== How can pagelets be embedded?
+
+There are a few options:
+
+* 'Inline' embedding, i.e. the pagelet is rendered in the containing
+  Rails process, halting execution of the containing page while it
+  happens.
+
+* Multiple pagelets rendered in parallel, blocking at each insertion
+  point until the relevant render job has completed. (Not sure how
+  easy this will be in Rails.)
+
+* BigPipe style parallel rendering. (See [1]. Again, Rails may be a
+  constraint here both through limits in its ability to handle
+  multiple threads and the difficulty of flushing the output stream
+  before the request has completed.)
+
+* Using a separate backend HTTP server to render pageletes (possibly
+  in parallel.)
+
+* Through ESI in a caching proxy such as Varnish.
+
+* Loading pagelets through secondary requests via client side
+  Javascript.
+
+Only the first of these is currently implemented. There may be other
+option, so please let me know if you spot anything missing.
+
 
 [1] http://www.facebook.com/notes/facebook-engineering/bigpipe-pipelining-web-pages-for-high-performance/389414033919

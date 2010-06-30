@@ -8,7 +8,7 @@ module ActionEmbedding
 
     def process
       request = EmbeddedRequest.new(@path, @session, @env)
-      response = EmbeddedReponse.new
+      response = EmbeddedResponse.new
       Dispatcher.new($stdout, request, response).dispatch_unlocked
     end
   end

@@ -1,4 +1,4 @@
-== ActionEmbedding ==
+= ActionEmbedding
 
 An experimental Rails plugin to investigate ways to embed pagelets
 into standard ActionView templates. The term pagelet is taken from

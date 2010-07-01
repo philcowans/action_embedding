@@ -4,17 +4,19 @@ An experimental Rails plugin to investigate ways to embed pagelets
 into standard ActionView templates. The term pagelet is taken from
 Facebook's description of their BigPipe infrastructure [1].
 
-<b>WARNING:</b> This code is very far from being production ready. It
-digs quite deeply into the internals of Rails, and is likely to have
-side effects which could make your app unstable. Having said that, if
-you have an app where stability isn't that important, and you'd like
-to try this out, any feedback would be appreciated.
+<b>WARNING:</b> I've never actually used this in a production project,
+so it may be horribly broken in ways I haven't figured out yet. If you
+can provide any evidence it actually works then let me know.
+
+This was built against Rails 2.2.x - 2.3.x is in theory supported but
+uses a different entry point into ActionController::Base. No idea
+whether it's at all usable against any of the 3.0.0 betas.
 
 == What does it do?
 
-Not much at the moment, but the idea is to look at different ways of
-composing larger pages from distinct 'pagelets' (or modules, or
-components, or cells). The key design principles are:
+This is a bit of an experiment to look at different ways of composing
+larger pages from distinct 'pagelets' (or modules, or components, or
+cells). The key design principles are:
 
 * Pagelets share little or no state with each other or with the
   containing page. This makes them easier to reconfigure, if necessary
@@ -26,9 +28,24 @@ components, or cells). The key design principles are:
 * Switching between embedding methods should be a configuration rather
   than coding change.
 
+== Installation
+
+Install the plugin, then include the helper module in your app: 
+
+  module ApplicationHelper
+    include ActionFlow::Helpers
+  end
+
+Embed pagelets into your views using something like
+
+  <%=embed_pagelet('/pagelets/two') %>
+
+Where +/pagelets/two+ is a valid route to the content being embedded
+(i.e. you can access this path externally).
+
 == How can pagelets be embedded?
 
-There are a few options:
+There are in theory a few options:
 
 * 'Inline' embedding, i.e. the pagelet is rendered in the containing
   Rails process, halting execution of the containing page while it

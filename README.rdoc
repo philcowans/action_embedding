@@ -33,7 +33,7 @@ cells). The key design principles are:
 Install the plugin, then include the helper module in your app: 
 
   module ApplicationHelper
-    include ActionFlow::Helpers
+    include ActionEmbedding::Helpers
   end
 
 Embed pagelets into your views using something like

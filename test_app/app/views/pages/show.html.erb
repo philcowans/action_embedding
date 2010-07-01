@@ -4,6 +4,6 @@
   </head>
   <body>
     <h1>This text comes from page <%=@page_id %></h1>
-    <%=embed_pagelet('/pagelets/two') %>
+    <%=embed_pagelet('/pagelets/two', :send_xhr_header => params[:send_xhr_header]) %>
   </body>
 </html>

@@ -8,6 +8,9 @@ module NavigationHelpers
   def path_to(page_name)
     case page_name
 
+    when /^page (.*) with xhr embedding$/
+      page_path($1, :send_xhr_header => "true")
+
     when /^page (.*)/
       page_path($1)
 

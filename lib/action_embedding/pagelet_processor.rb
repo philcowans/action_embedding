@@ -1,7 +1,8 @@
 module ActionEmbedding
   class PageletProcessor
-    def initialize(path)
+    def initialize(path, opts = {})
       @path = path
+      @opts = opts
     end
 
     def process
@@ -25,7 +26,7 @@ module ActionEmbedding
     def rack_env
       # See http://rack.rubyforge.org/doc/SPEC.html for what needs to
       # go into a Rack environment hash.
-      {
+      env = {
         'REQUEST_METHOD' => 'GET',
         'SCRIPT_NAME' => '',
         'PATH_INFO' => @path,
@@ -40,6 +41,10 @@ module ActionEmbedding
         'rack.multiprocess' => false,
         'rack.run_once' => false
       }
+
+      env['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest' if @opts[:send_xhr_header]
+
+      env
     end
   end
 end

@@ -1,1 +1,5 @@
 <h2>This text comes from pagelet <%=params[:id] %></h2>
+
+<% unless request.xhr? %>
+  <p>This text is invisible for XHR requests</p>
+<% end %>

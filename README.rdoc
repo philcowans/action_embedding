@@ -38,10 +38,14 @@ Install the plugin, then include the helper module in your app:
 
 Embed pagelets into your views using something like
 
-  <%=embed_pagelet('/pagelets/two') %>
+  <%=embed_pagelet('/pagelets/two', :send_xhr_header => true) %>
 
-Where +/pagelets/two+ is a valid route to the content being embedded
-(i.e. you can access this path externally).
+Where <tt>/pagelets/two</tt> is a valid route to the content being
+embedded (i.e. you can access this path externally). The
+<tt>send_xhr_header</tt> option causes the embedded pagelet's request
+to include an <tt>X-Requested-With: XMLHttpRequest</tt> header, which
+can be used to make it behave consistently with AJAX loaded content
+(e.g. by returning a fragment rather than a full HTML document).
 
 == How can pagelets be embedded?
 

@@ -1,7 +1,7 @@
 module ActionEmbedding
   module Helpers
     def embed_pagelet(path)
-      PageletProcessor.new(path, session, request.env).process
+      PageletProcessor.new(path).process
     end
   end
 end

@@ -3,10 +3,13 @@ module ActionEmbedding
     def initialize(path, opts = {})
       @path = path
       @opts = opts
+
+      @opts[:method] ||= :inline
     end
 
     def process
-      InlineProcessor.new(@path, @opts).process
+      processor_klass = "ActionEmbedding::PageletProcessor::#{@opts[:method].to_s.camelize}Processor".constantize
+      processor_klass.new(@path, @opts).process
     end
   end
 end

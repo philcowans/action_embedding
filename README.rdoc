@@ -38,7 +38,7 @@ Install the plugin, then include the helper module in your app:
 
 Embed pagelets into your views using something like
 
-  <%=embed_pagelet('/pagelets/two', :send_xhr_header => true) %>
+  <%=embed_pagelet('/pagelets/two', :method => :inline, :send_xhr_header => true) %>
 
 Where <tt>/pagelets/two</tt> is a valid route to the content being
 embedded (i.e. you can access this path externally). The
@@ -49,11 +49,18 @@ can be used to make it behave consistently with AJAX loaded content
 
 == How can pagelets be embedded?
 
-There are in theory a few options:
+There are currently two values for the <tt>method</tt> option:
 
-* 'Inline' embedding, i.e. the pagelet is rendered in the containing
-  Rails process, halting execution of the containing page while it
-  happens.
+* <tt>:inline</tt> - the pagelet is rendered in the containing Rails
+  process, halting execution of the containing page while it
+  happens. This is the defaul method.
+
+* <tt>:proxy</tt> - the pagelet request is proxid to a separate
+  backend HTTP server. Use <tt>:proxy_host</tt> to specify the
+  hostname, and the optional <tt>:proxy_prefix</tt> to specify a
+  prefix to apply to the path before sending to the backend.
+
+In theory the following are possible, but not yet implemented:
 
 * Multiple pagelets rendered in parallel, blocking at each insertion
   point until the relevant render job has completed. (Not sure how
@@ -64,16 +71,9 @@ There are in theory a few options:
   multiple threads and the difficulty of flushing the output stream
   before the request has completed.)
 
-* Using a separate backend HTTP server to render pageletes (possibly
-  in parallel.)
-
 * Through ESI in a caching proxy such as Varnish.
 
 * Loading pagelets through secondary requests via client side
   Javascript.
-
-Only the first of these is currently implemented. There may be other
-option, so please let me know if you spot anything missing.
-
 
 [1] http://www.facebook.com/notes/facebook-engineering/bigpipe-pipelining-web-pages-for-high-performance/389414033919

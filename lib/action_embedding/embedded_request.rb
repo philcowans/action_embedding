@@ -8,6 +8,8 @@ require 'tempfile'
 require 'stringio'
 require 'strscan'
 
+require 'rack'
+
 require 'active_support/memoizable'
 require 'action_controller/cgi_ext'
 

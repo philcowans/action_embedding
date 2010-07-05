@@ -11,6 +11,9 @@ module ActionEmbedding
           # Rails 2.3 version
           ActionController::Routing::Routes.call(rack_env)[2]
         else
+          puts @opts
+          puts rack_env
+
           # Rails 2.2 version
           request = EmbeddedRequest.new(rack_env)
           response = EmbeddedResponse.new
@@ -40,7 +43,9 @@ module ActionEmbedding
           'rack.errors' => $stderr,
           'rack.multithread' => false,
           'rack.multiprocess' => false,
-          'rack.run_once' => false
+          'rack.run_once' => false,
+          'rack.session' => @opts[:inline_session] || {},
+          'HTTP_COOKIE' => @opts[:inline_cookie]
         }
         
         env['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest' if @opts[:send_xhr_header]

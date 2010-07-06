@@ -11,9 +11,6 @@ module ActionEmbedding
           # Rails 2.3 version
           ActionController::Routing::Routes.call(rack_env)[2]
         else
-          puts @opts
-          puts rack_env
-
           # Rails 2.2 version
           request = EmbeddedRequest.new(rack_env)
           response = EmbeddedResponse.new

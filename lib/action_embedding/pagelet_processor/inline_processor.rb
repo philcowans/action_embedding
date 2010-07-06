@@ -30,11 +30,12 @@ module ActionEmbedding
       def rack_env
         # See http://rack.rubyforge.org/doc/SPEC.html for what needs to
         # go into a Rack environment hash.
+        path_info, query_string = @path.split('?')
         env = {
           'REQUEST_METHOD' => 'GET',
           'SCRIPT_NAME' => '',
-          'PATH_INFO' => @path,
-          'QUERY_STRING' => '',
+          'PATH_INFO' => path_info,
+          'QUERY_STRING' => query_string || '',
           'SERVER_NAME' => 'www.example.com',
           'SERVER_PORT' => 80,
           'rack.version' => [1, 1],

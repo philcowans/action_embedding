@@ -49,7 +49,7 @@ can be used to make it behave consistently with AJAX loaded content
 
 == How can pagelets be embedded?
 
-There are currently two values for the <tt>method</tt> option:
+There are currently four values for the <tt>method</tt> option:
 
 * <tt>:inline</tt> - the pagelet is rendered in the containing Rails
   process, halting execution of the containing page while it

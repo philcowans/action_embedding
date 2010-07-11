@@ -1,3 +1,5 @@
+require "open-uri"
+
 module ActionEmbedding
   class PageletProcessor
     class ProxyProcessor
@@ -7,6 +9,8 @@ module ActionEmbedding
       end
 
       def process
+        body = ''
+
         open(proxy_url) do |backend|
           body = backend.read
         end

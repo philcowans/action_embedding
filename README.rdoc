@@ -60,6 +60,24 @@ There are currently two values for the <tt>method</tt> option:
   hostname, and the optional <tt>:proxy_prefix</tt> to specify a
   prefix to apply to the path before sending to the backend.
 
+* <tt>:esi</tt> - include an <tt>&lt;esi:include... &gt;</tt>
+  pseudo-tag at the insertion point so that substitution can be
+  performed in a caching layer supporting Edge Side Includes
+  (e.g. Varnish web accelerator, Akamai edge caching).
+
+* <tt>:xhr</tt> - include a <tt>div</tt> with class
+  <tt>xhr-replace</tt> and an additional <tt>xhr-href</tt>
+  parameter. Substitution of the correct content can be performed on
+  page load with a small piece of JavaScript, e.g. using jQuery:
+
+  <script> 
+    $(document).ready(function() {
+      $('.xhr-replace').each(function(idx) {
+        $(this).load($(this).attr('xhr-href'));
+      });
+    });
+  </script> 
+
 In theory the following are possible, but not yet implemented:
 
 * Multiple pagelets rendered in parallel, blocking at each insertion
@@ -70,10 +88,5 @@ In theory the following are possible, but not yet implemented:
   constraint here both through limits in its ability to handle
   multiple threads and the difficulty of flushing the output stream
   before the request has completed.)
-
-* Through ESI in a caching proxy such as Varnish.
-
-* Loading pagelets through secondary requests via client side
-  Javascript.
 
 [1] http://www.facebook.com/notes/facebook-engineering/bigpipe-pipelining-web-pages-for-high-performance/389414033919

@@ -7,10 +7,15 @@ Feature: Inline embedding
     When I go to page one
     Then I should see "This text comes from page one"
     And I should see "This text comes from pagelet two"
-    And I should see "This text is invisible for XHR requests"
+    And I should not see "This text is visible for XHR requests"
 
   Scenario: Pagelet embedding with X-Requested-With header
     When I go to page one with xhr embedding
     Then I should see "This text comes from page one"
     And I should see "This text comes from pagelet two"
-    And I should not see "This text is invisible for XHR requests"
+    And I should see "This text is visible for XHR requests"
+
+  Scenario: Following redirects from pagelets
+    When I go to page withredirect
+    And I should see "This text comes from pagelet three"
+    And I should not see "You are being redirected"

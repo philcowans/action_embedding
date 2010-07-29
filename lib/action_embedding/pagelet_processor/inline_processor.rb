@@ -19,10 +19,22 @@ module ActionEmbedding
           controller.process(request, response)
         end
 
-        response.body
+        follow_redirect_or_return_body(response)
       end
       
       private
+
+      def follow_redirect_or_return_body(response)
+        if response.status.to_s.first == '3' && response.location
+          # This will obviously not work if we redirect to somewhere
+          # outside our app, but in that case we should not be using
+          # the inline method.
+          @path = response.location.sub(/https?:\/\/[^\/]+/, '')
+          process
+        else
+          response.body
+        end
+      end
       
       def rack_env
         # See http://rack.rubyforge.org/doc/SPEC.html for what needs to

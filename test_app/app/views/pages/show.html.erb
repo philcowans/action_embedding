@@ -5,5 +5,7 @@
   <body>
     <h1>This text comes from page <%=@page_id %></h1>
     <%=embed_pagelet('/pagelets/two', :send_xhr_header => params[:send_xhr_header]) %>
+
+    <%=embed_pagelet('/pagelets/redirect') if @page_id == "withredirect" %>
   </body>
 </html>

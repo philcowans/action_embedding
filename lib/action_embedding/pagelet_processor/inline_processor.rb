@@ -9,7 +9,7 @@ module ActionEmbedding
       def process
         if ActionController::Routing::Routes.respond_to?(:call)
           # Rails 2.3 version
-          ActionController::Routing::Routes.call(rack_env)[2]
+          response = ActionController::Routing::Routes.call(rack_env)[2]
         else
           # Rails 2.2 version
           request = EmbeddedRequest.new(rack_env)
@@ -17,9 +17,9 @@ module ActionEmbedding
           
           controller = ActionController::Routing::Routes.recognize(request)
           controller.process(request, response)
-          
-          response.body
         end
+
+        response.body
       end
       
       private
